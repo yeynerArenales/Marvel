@@ -16,9 +16,9 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.marvelSvc.getMarvel().subscribe( data => {
-      console.log(data)
-    })
+    // this.marvelSvc.getMarvel().subscribe( data => {
+    //   console.log(data)
+    // })
   }
 
 }

@@ -1,7 +1,9 @@
+@import '../../../scss/variable.scss';
+
 .header{
     height: 60px;
     width: 100%;
-    background-color: #ec1d24;
+    background-color: $red-color;
     display: flex;
     justify-content: center;
     align-items: center;
