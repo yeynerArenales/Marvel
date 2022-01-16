@@ -1,4 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+<<<<<<< HEAD
+=======
+import { Router } from "@angular/router";
+import { MarvelService } from 'src/app/services/marvel.service';
+>>>>>>> FEATURE/SERVICE
 
 @Component({
   selector: 'app-card',
@@ -15,6 +20,7 @@ export class CardComponent implements OnInit {
   @Input() id: string = '';
   imagePath: string = ''
 
+<<<<<<< HEAD
   constructor() { }
 
   ngOnInit(): void {
@@ -30,6 +36,20 @@ export class CardComponent implements OnInit {
 
   openDetails(){
     var myModal = document.getElementById(this.id)
+=======
+  constructor(
+    private router: Router,
+    private marvelSvc: MarvelService
+  ) { }
+
+  ngOnInit(): void {
+    this.imagePath = `${this.thumbnail}.${this.extension}`
+    this.modified = this.marvelSvc.changeModified(this.modified);
+  }
+
+  openDetails() {
+    this.router.navigate([`view-details/${this.id}`])
+>>>>>>> FEATURE/SERVICE
   }
 
 }

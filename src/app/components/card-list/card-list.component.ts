@@ -24,7 +24,6 @@ export class CardListComponent implements OnInit {
         window.scrollY + window.innerHeight >= document.body.offsetHeight - 300
       ) {
         this.newArray.forEach(item => this.marvelList.push(item))
-        console.log(document.body.offsetHeight)
       }
       return
     });
@@ -34,24 +33,15 @@ export class CardListComponent implements OnInit {
     this.marvelSvc.getMarvel().subscribe((res: any) => {
       let { results } = res.data;
       this.marvelList = results.map((item: any) => {
-        return this.detructuringObject(item);
+        return this.marvelSvc.detructuringObject(item);
       })
-      console.log(this.marvelList)
       this.newArray = results.map((item: any) => {
-        return this.detructuringObject(item);
+        return this.marvelSvc.detructuringObject(item);
       })
+      this.marvelSvc.changeMarvelArray(this.marvelList)
     })
   }
 
-  detructuringObject(object: any): MarvelObject {
-    let { id, name, description, modified, thumbnail } = object
-    return {
-      id,
-      name,
-      description,
-      modified,
-      thumbnail
-    }
-  }
+
 
 }
