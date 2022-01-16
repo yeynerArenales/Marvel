@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-<<<<<<< HEAD
-=======
 import { Router } from "@angular/router";
 import { MarvelService } from 'src/app/services/marvel.service';
->>>>>>> FEATURE/SERVICE
 
 @Component({
   selector: 'app-card',
@@ -20,23 +17,6 @@ export class CardComponent implements OnInit {
   @Input() id: string = '';
   imagePath: string = ''
 
-<<<<<<< HEAD
-  constructor() { }
-
-  ngOnInit(): void {
-    this.imagePath = `${this.thumbnail}.${this.extension}`
-    this.modified = this.changeModified();
-    
-  }
-
-  changeModified(): string {
-    let date = new Date(Date.parse(this.modified))
-    return date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
-  }
-
-  openDetails(){
-    var myModal = document.getElementById(this.id)
-=======
   constructor(
     private router: Router,
     private marvelSvc: MarvelService
@@ -49,7 +29,6 @@ export class CardComponent implements OnInit {
 
   openDetails() {
     this.router.navigate([`view-details/${this.id}`])
->>>>>>> FEATURE/SERVICE
   }
 
 }
