@@ -26,7 +26,8 @@ export class ViewDetailsComponent implements OnInit, OnDestroy {
   };
   public imageUrl: string = '';
   public randomArray: MarvelObject[] = [];
-  marvelSubs: Subscription  = new Subscription;
+  private marvelSubs: Subscription = new Subscription;
+  public marvelArray: MarvelObject[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -45,15 +46,25 @@ export class ViewDetailsComponent implements OnInit, OnDestroy {
     this.marvelSubs = this.marvelData$.subscribe(data => {
       if (data == undefined || data.length == 0) {
         this.router.navigate([''])
+      }else{
+        this.marvelArray = data;
+        this.setMarvel(data)
       }
-      this.marvel = data.find(item => item.id == this.id)
-      if (this.marvel != undefined) {
-        this.imageUrl = `${this.marvel.thumbnail.path}.${this.marvel.thumbnail.extension}`
-        console.log(this.marvel.modified)
-        this.marvel.modified = this.marvelSvc.changeModified(this.marvel.modified)
-      }
-      this.randomArray = [1, 2, 3].map(item => data[Math.floor(Math.random() * data.length)])
     })
+  }
+
+  setMarvel(data: MarvelObject[]) {
+    this.marvel = data.find(item => item.id == this.id)
+    if (this.marvel != undefined) {
+      this.imageUrl = `${this.marvel.thumbnail.path}.${this.marvel.thumbnail.extension}`
+      this.marvel.modified = this.marvelSvc.changeModified(this.marvel.modified)
+      this.randomArray = [1, 2, 3].map(item => data[Math.floor(Math.random() * data.length)])
+    }
+  }
+
+  changeInfo() {
+    this.id = Number(this.route.snapshot.paramMap.get('id'))
+    this.setMarvel(this.marvelArray)
   }
 
   ngOnDestroy() {

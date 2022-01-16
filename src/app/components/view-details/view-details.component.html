@@ -36,6 +36,6 @@
     <div class="cards">
         <app-card *ngFor="let hero of randomArray" [name]="hero.name" [description]="hero.description"
             [modified]="hero.modified" [thumbnail]="hero.thumbnail.path" [extension]="hero.thumbnail.extension"
-            [id]="hero.id.toString()"></app-card>
+            [id]="hero.id.toString()" (click)="changeInfo()"></app-card>
     </div>
 </div>

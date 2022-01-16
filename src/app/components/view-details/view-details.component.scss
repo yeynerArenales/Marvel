@@ -10,7 +10,7 @@
     padding: 0px;
 
     a{
-        width: 70px;
+        width: auto;
         margin-left: 25px;
     }
 }
@@ -42,8 +42,7 @@
     }
 
     span, p{
-        min-width: 500px;
-        max-width: 550px;
+        width: 550px;
         font-size: 18px;
         font-weight: 600;
         margin-left: 10px;
