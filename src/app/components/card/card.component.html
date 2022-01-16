@@ -1,20 +1,6 @@
-<div class="card">  
-    <h3 class="title">
-        name:
-    </h3>
+<div class="card" (click)="openDetails()">
+    <img class="imageHero" [src]="imagePath" [alt]="name">
     <span class="name">
         {{name}}
-    </span>
-    <h3 class="title">
-        description:
-    </h3>
-    <span class="description">
-        {{description}}
-    </span>
-    <h3 class="title">
-        Modified:
-    </h3>
-    <span class="date">
-        {{modified}}
     </span>
 </div>

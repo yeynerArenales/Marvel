@@ -3,37 +3,28 @@
 .card{
     margin: 10px;
     width: 300px;
-    padding: 15px;
-    height: 400px;
+    height: 285px;
     border-radius: 15px;
-    border: 1px solid $red-color;
-    background-color: #fff;
-}
+    background-color: $red-color;
 
-.title{
-    color: $red-color;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 0;
+    :hover{
+        cursor: pointer;
+    }
 }
 
 .name{
-    color: #202020;
-    margin-left: 20px;
+    color: #fff;
     font-weight: 700;
     font-size: 22px;
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
-.description{
-    color: #202020;
-    margin-left: 20px;
-    font-size: 14px;
-}
-
-.date{
-    color: #202020;
-    margin-left: 20px;
-    font-weight: 700;
-    font-size: 16px;
+.imageHero{
+    margin-top: -1px;
+    margin-left: -1px;
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
 }

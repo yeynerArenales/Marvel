@@ -9,11 +9,27 @@ export class CardComponent implements OnInit {
 
   @Input() name: string = 'IronMan';
   @Input() description: string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare eleifend nunc, ut rhoncus nisi luctus non. Nam sed molestie mi, eu vehicula ligula. Phasellus lacinia aliquam rutrum. Phasellus at massa vitae purus lobortis vulputate. Sed congue lectus vitae tristique vulputate. Cras posuere nisl nec ultricies luctus.'
-  @Input() modified: string = '14/01/2022' 
+  @Input() modified: any = '14/01/2022'
+  @Input() thumbnail: string = ''
+  @Input() extension: string = ''
+  @Input() id: string = '';
+  imagePath: string = ''
 
   constructor() { }
 
   ngOnInit(): void {
+    this.imagePath = `${this.thumbnail}.${this.extension}`
+    this.modified = this.changeModified();
+    
+  }
+
+  changeModified(): string {
+    let date = new Date(Date.parse(this.modified))
+    return date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+  }
+
+  openDetails(){
+    var myModal = document.getElementById(this.id)
   }
 
 }
