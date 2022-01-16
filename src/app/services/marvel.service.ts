@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class MarvelService {
   ) { }
 
   getMarvel(){
-    let url: string = "https://gateway.marvel.com/v1/public/characters?apikey=ebc2c6543ba6eb7b61f67a3b3f9c6b46"
+    let url: string = `https://gateway.marvel.com/v1/public/characters?apikey=${environment.apikey}`
     return this.http.get(url); 
   }
 }
