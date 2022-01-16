@@ -28,6 +28,10 @@ export class ViewDetailsComponent implements OnInit, OnDestroy {
   public randomArray: MarvelObject[] = [];
   private marvelSubs: Subscription = new Subscription;
   public marvelArray: MarvelObject[] = [];
+  public chgName: boolean = false;
+  public newName: string | undefined = '';
+  public chgDesc: boolean = false;
+  public newDesc: string | undefined = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +50,7 @@ export class ViewDetailsComponent implements OnInit, OnDestroy {
     this.marvelSubs = this.marvelData$.subscribe(data => {
       if (data == undefined || data.length == 0) {
         this.router.navigate([''])
-      }else{
+      } else {
         this.marvelArray = data;
         this.setMarvel(data)
       }
@@ -69,6 +73,46 @@ export class ViewDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.marvelSubs.unsubscribe();
+  }
+
+  changeName() {
+    this.chgName = !this.chgName
+    this.newName = this.marvel?.name
+  }
+
+  changeDesc() {
+    this.chgDesc = !this.chgDesc
+    this.newDesc = this.marvel?.description
+  }
+  
+  nameChange() {
+    this.chgName = !this.chgName
+    let index = this.marvelArray.findIndex(x => x.name == this.marvel?.name)
+    if (this.newName && this.marvel) {
+      this.marvel.name = this.newName;
+      this.marvelArray[index] = this.marvel;
+      this.marvelSvc.changeMarvelArray(this.marvelArray);
+      this.changeModified(index);
+    }
+  }
+
+  descChange() {
+    this.chgDesc = !this.chgDesc
+    let index = this.marvelArray.findIndex(x => x.description == this.marvel?.description)
+    if (this.newDesc && this.marvel) {
+      this.marvel.description = this.newDesc;
+      this.marvelArray[index] = this.marvel;
+      this.marvelSvc.changeMarvelArray(this.marvelArray);
+      this.changeModified(index);
+    }
+  }
+
+  changeModified(index: number) {
+    if (this.marvel) {
+      this.marvel.modified = this.marvelSvc.changeModified(new Date().toString())
+      this.marvelArray[index] = this.marvel;
+      this.marvelSvc.changeMarvelArray(this.marvelArray);
+    }
   }
 
 }
