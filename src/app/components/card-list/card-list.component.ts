@@ -11,6 +11,7 @@ export class CardListComponent implements OnInit {
 
   public marvelList: MarvelObject[] = [];
   public newArray: MarvelObject[] = [];
+  public search: string = '';
 
   constructor(
     private marvelSvc: MarvelService
@@ -42,6 +43,22 @@ export class CardListComponent implements OnInit {
     })
   }
 
+  debounce(func: any, timeout = 500) {
+    let timer: any;
+    return (...args: any) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
 
+  processSearch = this.debounce(() => this.searchData());
+
+  searchData() {
+    if (this.search == '') {
+      this.marvelList = this.newArray
+    } else {
+      this.marvelList = this.marvelList.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()))
+    }
+  }
 
 }
