@@ -26,6 +26,11 @@
         width: 350px;
         object-fit: cover;
         border-radius: 30px;
+
+        @media screen and (max-width: 360px){
+            width: 200px;
+        }
+
     }
 
     margin-top: 10px;
@@ -46,6 +51,18 @@
         font-size: 18px;
         font-weight: 600;
         margin-left: 10px;
+
+        @media screen and (max-width: 600px){
+            width: 450px;
+        }
+
+        @media screen and (max-width: 490px){
+            width: 300px;
+        }
+
+        @media screen and (max-width: 360px){
+            width: 200px;
+        }
     }
 }
 
@@ -74,6 +91,14 @@
 
     input{
         width: 300px;
+
+        @media screen and (max-width: 490px){
+            width: 200px;
+        }
+
+        @media screen and (max-width: 360px){
+            width: 100px;
+        }
     }
 
     button{
@@ -84,6 +109,14 @@
     textarea{
         width: 450px;
         height: 120px;
+
+        @media screen and (max-width: 550px){
+            width: 300px;
+        }
+
+        @media screen and (max-width: 400px){
+            width: 200px;
+        }
     }
 
 }

@@ -10,6 +10,11 @@
     :hover{
         cursor: pointer;
     }
+
+    @media screen and (max-width: 310px){
+        width: 220px;
+        height: 205px;
+    }
 }
 
 .name{
@@ -27,4 +32,9 @@
     height: 250px;
     object-fit: cover;
     border-radius: 15px 15px 0 0;
+
+    @media screen and (max-width: 310px){
+        width: 220px;
+        height: 175px;
+    }
 }
