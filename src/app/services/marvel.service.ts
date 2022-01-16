@@ -17,7 +17,7 @@ export class MarvelService {
   ) { }
 
   getMarvel(){
-    let url: string = `https://gateway.marvel.com/v1/public/characters?apikey=${environment.apikey}`
+    let url: string = `https://gateway.marvel.com/v1/public/characters?apikey=${environment.apikey}&limit=50`
     return this.http.get(url); 
   }
 
