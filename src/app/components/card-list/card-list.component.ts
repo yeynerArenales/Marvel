@@ -1,25 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MarvelService } from 'src/app/services/marvel.service';
 import { MarvelObject } from 'src/app/models/models';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss']
 })
-export class CardListComponent implements OnInit {
+export class CardListComponent implements OnInit, OnDestroy {
 
   public marvelList: MarvelObject[] = [];
   public newArray: MarvelObject[] = [];
   public search: string = '';
+  private marvelData$: Observable<MarvelObject[]>;
+  private marvelSubs: Subscription = new Subscription;
 
   constructor(
     private marvelSvc: MarvelService
-  ) { }
+  ) {
+    this.marvelData$ = this.marvelSvc.getMarvelArray()
+  }
 
   ngOnInit(): void {
     this.getList()
-
     window.addEventListener('scroll', () => {
       if (
         window.scrollY + window.innerHeight >= document.body.offsetHeight - 300
@@ -30,17 +34,30 @@ export class CardListComponent implements OnInit {
     });
   }
 
-  getList() {
-    this.marvelSvc.getMarvel().subscribe((res: any) => {
-      let { results } = res.data;
-      this.marvelList = results.map((item: any) => {
-        return this.marvelSvc.detructuringObject(item);
-      })
-      this.newArray = results.map((item: any) => {
-        return this.marvelSvc.detructuringObject(item);
-      })
-      this.marvelSvc.changeMarvelArray(this.marvelList)
+  getMarvelObservable(){
+    let res: MarvelObject[] = [];
+    this.marvelSubs = this.marvelData$.subscribe(data => {
+      res = data
     })
+    return res
+  }
+
+  getList() {
+    let info: MarvelObject[] = this.getMarvelObservable();
+    if(info.length > 0){
+      this.marvelList = info
+    }else{
+      this.marvelSvc.getMarvel().subscribe((res: any) => {
+        let { results } = res.data;
+        this.marvelList = results.map((item: any) => {
+          return this.marvelSvc.detructuringObject(item);
+        })
+        this.newArray = results.map((item: any) => {
+          return this.marvelSvc.detructuringObject(item);
+        })
+        this.marvelSvc.changeMarvelArray(this.marvelList)
+      })
+    }
   }
 
   debounce(func: any, timeout = 500) {
@@ -59,6 +76,10 @@ export class CardListComponent implements OnInit {
     } else {
       this.marvelList = this.marvelList.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()))
     }
+  }
+
+  ngOnDestroy() {
+    this.marvelSubs.unsubscribe();
   }
 
 }
