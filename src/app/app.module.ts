@@ -8,12 +8,16 @@ import { HeaderComponent } from './components/header/header.component';
 
 import { MarvelService } from './services/marvel.service';
 import { CardComponent } from './components/card/card.component';
+import { CardListComponent } from './components/card-list/card-list.component';
+import { ViewDetailsComponent } from './components/view-details/view-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CardComponent
+    CardComponent,
+    CardListComponent,
+    ViewDetailsComponent
   ],
   imports: [
     BrowserModule,

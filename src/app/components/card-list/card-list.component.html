@@ -1,0 +1,5 @@
+<div class="list">
+    <app-card *ngFor="let hero of marvelList" [name]="hero.name" [description]="hero.description"
+        [modified]="hero.modified" [thumbnail]="hero.thumbnail.path" [extension]="hero.thumbnail.extension"
+        [id]="hero.id.toString()"></app-card>
+</div>
