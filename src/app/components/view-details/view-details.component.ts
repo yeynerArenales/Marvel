@@ -62,17 +62,14 @@ export class ViewDetailsComponent implements OnInit, OnDestroy {
     if (this.marvel != undefined) {
       this.imageUrl = `${this.marvel.thumbnail.path}.${this.marvel.thumbnail.extension}`
       this.marvel.modified = this.marvelSvc.changeModified(this.marvel.modified)
-      this.randomArray = [1, 2, 3].map(item => data[Math.floor(Math.random() * data.length)])
+      if(this.randomArray.length == 0)
+        this.randomArray = [1, 2, 3].map(item => data[Math.floor(Math.random() * data.length)])
     }
   }
 
   changeInfo() {
     this.id = Number(this.route.snapshot.paramMap.get('id'))
     this.setMarvel(this.marvelArray)
-  }
-
-  ngOnDestroy() {
-    this.marvelSubs.unsubscribe();
   }
 
   changeName() {
@@ -109,10 +106,13 @@ export class ViewDetailsComponent implements OnInit, OnDestroy {
 
   changeModified(index: number) {
     if (this.marvel) {
-      this.marvel.modified = this.marvelSvc.changeModified(new Date().toString())
-      this.marvelArray[index] = this.marvel;
+      this.marvelArray[index].modified = new Date().toString();
       this.marvelSvc.changeMarvelArray(this.marvelArray);
     }
+  }
+
+  ngOnDestroy() {
+    this.marvelSubs.unsubscribe();
   }
 
 }
