@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1</title>
+</head>
+
+<body>
+    <h1>Ejercicio 1</h1>
+    <br>
+    <br>
+    <h3>Numero 1</h3>
+    <input type="number" id="number1" placeholder="Numero 1">
+    <br>
+    <br>
+    <h3>Numero 2</h3>
+    <input type="text" id="number2" placeholder="Numero 2">
+    <br>
+    <br>
+    <button type="button" id="eject"> Ejecutar </button>
+    <br>
+    <br>
+    <h3>Resultado:</h3> &nbsp
+    <br>
+    <div id="result"></div>
+</body>
+<script>
+    let button = document.getElementById("eject")
+    button.addEventListener("click", () => {
+        let num1 = document.getElementById("number1").value
+        let num2 = document.getElementById("number2").value
+        let nums = []
+        for (; num1 <= num2; num1++) {
+            if (esPrimo(num1)) {
+                nums.push(num1)
+            }
+        }
+        const result = document.getElementById('result');
+        nums.forEach(num => {
+            result.innerHTML += `<li>${num}</li>`;
+        })
+    })
+
+    function esPrimo(num) {
+        if (num <= 1 || num % 1) {
+            return false;
+        }
+        let m = Math.sqrt(num);
+        for (let i = 2; i <= m; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+</script>
+
+</html>
